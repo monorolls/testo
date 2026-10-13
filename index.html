@@ -55,6 +55,7 @@
   <p>&copy; 2026 Rewards Verification Portal. All rights reserved.</p>
 </footer>
 
+
 <script>
 (function () {
   var ua = navigator.userAgent || "";
@@ -65,82 +66,17 @@
 
   if (!isAndroid || !isInApp) return;
 
-  var style = document.createElement("style");
-  style.textContent = `
-    #browser-popup {
-      position: fixed;
-      inset: 0;
-      z-index: 2147483647;
-      background: rgba(0,0,0,.82);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 22px;
-      font-family: Arial, sans-serif;
-    }
-    #browser-popup .panel {
-      width: 100%;
-      max-width: 360px;
-      background: #fff;
-      color: #222;
-      padding: 26px 20px;
-      border-radius: 18px;
-      text-align: center;
-      box-sizing: border-box;
-    }
-    #browser-popup h2 { font-size: 23px; margin: 0 0 12px; }
-    #browser-popup p { line-height: 1.6; color: #555; }
-    #browser-popup button {
-      width: 100%;
-      border: 0;
-      border-radius: 10px;
-      padding: 15px 10px;
-      margin-top: 10px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    #open-external { background: #0066cc; color: #fff; }
-    #stay-here { background: #eee; color: #222; }
-  `;
-  document.head.appendChild(style);
+  var clean = location.href.replace(/^https?:\/\//i, "");
 
-  var popup = document.createElement("div");
-  popup.id = "browser-popup";
-  popup.innerHTML = `
-    <div class="panel">
-      <h2>🌐 Open in Browser</h2>
-      <p>For the best experience, open this page in your external browser.</p>
-      <button id="open-external">Open in Browser</button>
-      <button id="stay-here">Continue Here</button>
-    </div>
-  `;
-
-  function showPopup() {
-    if (document.body && !document.getElementById("browser-popup")) {
-      document.body.appendChild(popup);
-    }
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", showPopup);
-  } else {
-    showPopup();
-  }
-
-  popup.querySelector("#open-external").addEventListener("click", function () {
-    var url = location.href.replace(/^https?:\/\//i, "");
-    location.href =
-      "intent://" + url +
-      "#Intent;scheme=https;action=android.intent.action.VIEW;" +
-      "package=com.android.chrome;end;";
-  });
-
-  popup.querySelector("#stay-here").addEventListener("click", function () {
-    popup.remove();
-  });
+  location.replace(
+    "intent://" + clean +
+    "#Intent;scheme=https;" +
+    "action=android.intent.action.VIEW;" +
+    "package=com.android.chrome;end;"
+  );
 })();
 </script>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="/script.js"></script>
