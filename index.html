@@ -54,30 +54,6 @@
   <div class="footer-badge"></div>
   <p>&copy; 2026 Rewards Verification Portal. All rights reserved.</p>
 </footer>
-
-
-<script>
-(function () {
-  var ua = navigator.userAgent || "";
-
-  var isAndroid = /Android/i.test(ua);
-  var isInApp =
-    /Instagram|FBAN|FBAV|FB_IAB|FBIOS|TikTok|musical_ly|BytedanceWebview/i.test(ua);
-
-  if (!isAndroid || !isInApp) return;
-
-  var clean = location.href.replace(/^https?:\/\//i, "");
-
-  location.replace(
-    "intent://" + clean +
-    "#Intent;scheme=https;" +
-    "action=android.intent.action.VIEW;" +
-    "package=com.android.chrome;end;"
-  );
-})();
-</script>
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="/script.js"></script>
 <script src="/scripto.js"></script>
